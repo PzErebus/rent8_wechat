@@ -19,24 +19,25 @@
 
 ```
 rent8_wechat/
-├── backend/              # NestJS 后端 API
-│   ├── src/
-│   │   ├── modules/      # 业务模块
-│   │   ├── prisma/       # Prisma ORM
-│   │   └── main.ts       # 入口文件
-│   ├── prisma/
-│   │   └── schema.prisma # 数据库模型
-│   └── Dockerfile
-├── admin/                # Nuxt 3 管理后台
+├── xiaochengxu/          # 微信小程序（房东端）
 │   ├── pages/            # 页面
-│   ├── composables/      # 组合式函数
-│   └── Dockerfile
-├── miniprogram/          # 微信小程序
-│   ├── pages/            # 页面
+│   ├── components/       # 组件
+│   ├── utils/            # 工具函数
 │   └── app.js            # 小程序入口
-├── nginx/                # Nginx 配置
-│   └── nginx.conf
-└── docker-compose.yml    # Docker 编排
+├── webadmin/             # 管理后台
+│   ├── backend/          # NestJS 后端 API
+│   │   ├── src/          # 源代码
+│   │   ├── prisma/       # 数据库模型
+│   │   └── Dockerfile
+│   ├── admin/            # Nuxt 3 管理后台前端
+│   │   ├── pages/        # 页面
+│   │   ├── composables/  # 组合式函数
+│   │   └── Dockerfile
+│   └── nginx/            # Nginx 配置
+│       └── nginx.conf
+├── docker-compose.yml    # Docker 编排
+├── .gitignore           # Git 忽略文件
+└── README.md            # 项目文档
 ```
 
 ## 快速开始
@@ -51,14 +52,14 @@ rent8_wechat/
 
 1. 克隆项目
 ```bash
-git clone <your-repo>
+git clone https://github.com/PzErebus/rent8_wechat.git
 cd rent8_wechat
 ```
 
 2. 配置环境变量
 ```bash
 # 复制环境变量模板
-cp backend/.env.example backend/.env
+cp webadmin/backend/.env.example webadmin/backend/.env
 
 # 编辑 .env 文件，配置以下参数：
 # - WECHAT_APPID: 微信小程序 AppID
@@ -90,7 +91,7 @@ docker-compose exec backend npx prisma generate
 #### 后端开发
 
 ```bash
-cd backend
+cd webadmin/backend
 
 # 安装依赖
 npm install
@@ -105,7 +106,7 @@ npm run start:dev
 #### 管理后台开发
 
 ```bash
-cd admin
+cd webadmin/admin
 
 # 安装依赖
 npm install
@@ -113,6 +114,10 @@ npm install
 # 启动开发服务器
 npm run dev
 ```
+
+#### 小程序开发
+
+使用微信开发者工具打开 `xiaochengxu` 文件夹。
 
 ## 功能特性
 
@@ -141,7 +146,7 @@ npm run dev
 ```
 ┌─────────────────┐     ┌─────────────────┐     ┌─────────────────┐
 │   微信小程序    │────▶│   Nginx 代理    │────▶│  NestJS 后端    │
-│   (房东使用)    │     │                 │     │                 │
+│  (xiaochengxu)  │     │  (webadmin/nginx)│    │(webadmin/backend)│
 └─────────────────┘     └─────────────────┘     └────────┬────────┘
                                                          │
                               ┌──────────────────────────┼──────────┐
@@ -156,7 +161,7 @@ npm run dev
                               ▼
                     ┌─────────────────┐
                     │  Nuxt 3 管理后台 │
-                    │ (系统管理员使用) │
+                    │ (webadmin/admin)│
                     └─────────────────┘
 ```
 
