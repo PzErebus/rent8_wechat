@@ -1,0 +1,31 @@
+<view class="add-page">
+  <view class="form-card">
+    <view class="form-item">
+      <text class="label">选择房间 *</text>
+      <picker mode="selector" range="{{rooms}}" range-key="roomNumber" bindchange="onRoomChange">
+        <view class="picker-value {{formData.roomNumber ? '' : 'placeholder'}}">{{formData.roomNumber || '请选择房间'}}</view>
+      </picker>
+    </view>
+    <view class="form-item">
+      <text class="label">账单类型 *</text>
+      <picker mode="selector" range="{{billTypes}}" range-key="label" bindchange="onTypeChange">
+        <view class="picker-value">{{billTypes[0].label}}</view>
+      </picker>
+    </view>
+    <view class="form-item">
+      <text class="label">金额 (元) *</text>
+      <input type="digit" placeholder="请输入金额" data-field="amount" value="{{formData.amount}}" bindinput="onInput"/>
+    </view>
+    <view class="form-item">
+      <text class="label">月份 *</text>
+      <picker mode="date" fields="month" bindchange="onMonthChange" value="{{formData.month}}">
+        <view class="picker-value {{formData.month ? '' : 'placeholder'}}">{{formData.month || '请选择月份'}}</view>
+      </picker>
+    </view>
+    <view class="form-item">
+      <text class="label">备注</text>
+      <textarea placeholder="请输入备注（选填）" data-field="remark" value="{{formData.remark}}" bindinput="onInput"/>
+    </view>
+  </view>
+  <view class="submit-btn" bindtap="submit">确认创建</view>
+</view>

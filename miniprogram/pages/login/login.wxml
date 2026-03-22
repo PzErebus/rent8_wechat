@@ -1,13 +1,37 @@
 <!-- pages/login/login.wxml -->
-<view class="rent-height">
-  <view class="rent-title">登  录</view>
-  <view>
-    <t-input label="账号" placeholder="请输入账号" type="text" value="{{name}}" bindchange="onNameInput" clearable bindclear="clearName" />
-    <t-input label="密码" placeholder="请输入密码" type="password" value="{{password}}" bindchange="onPasswordInput" bindenter="onLoginTap" clearable bindclear="clearPassword" />
+<view class="login-container">
+  <view class="login-header">
+    <image class="logo" src="/images/rent.png" mode="aspectFit"/>
+    <view class="title">rent8 出租屋管理</view>
+    <view class="subtitle">房东专用管理工具</view>
   </view>
-  <view class="button-container">
-    <t-button theme="primary" size="large" block bindtap="onLoginTap">登 录</t-button>
+  
+  <view class="login-content">
+    <view class="welcome-text">欢迎使用</view>
+    <view class="desc-text">一键管理您的所有出租屋</view>
+    
+    <!-- 微信登录按钮 -->
+    <view class="button-container">
+      <button 
+        class="wechat-login-btn" 
+        open-type="getPhoneNumber" 
+        bind:getphonenumber="onGetPhoneNumber"
+        bindtap="onLoginTap"
+      >
+        <text class="wechat-icon">✓</text>
+        <text>微信一键登录</text>
+      </button>
+    </view>
+    
+    <view class="tips">
+      <text class="tip-text">新用户自动开通7天免费试用</text>
+    </view>
+  </view>
+  
+  <view class="login-footer">
+    <text class="agreement-text">登录即表示同意《用户协议》和《隐私政策》</text>
   </view>
 </view>
+
 <t-overlay visible="{{overlay}}" />
 <t-toast id="t-toast" />

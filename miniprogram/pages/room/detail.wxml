@@ -1,0 +1,84 @@
+<!--pages/room/detail.wxml-->
+<view class="detail-page">
+  <view class="detail-card" wx:if="{{room}}">
+    <!-- 房间信息 -->
+    <view class="section">
+      <view class="section-header">
+        <text class="section-title">房间信息</text>
+        <text class="edit-btn" bindtap="toggleEdit">{{editing ? '取消' : '编辑'}}</text>
+      </view>
+      
+      <view class="info-grid">
+        <view class="info-item">
+          <text class="label">房间号</text>
+          <input wx:if="{{editing}}" class="input" data-field="roomNumber" value="{{formData.roomNumber}}" bindinput="onInput"/>
+          <text wx:else class="value">{{room.roomNumber}}</text>
+        </view>
+        <view class="info-item">
+          <text class="label">状态</text>
+          <text class="value status-{{room.status}}">{{room.status === 'available' ? '空置' : '已出租'}}</text>
+        </view>
+        <view class="info-item">
+          <text class="label">面积</text>
+          <input wx:if="{{editing}}" class="input" type="digit" data-field="area" value="{{formData.area}}" bindinput="onInput"/>
+          <text wx:else class="value">{{room.area}}㎡</text>
+        </view>
+        <view class="info-item">
+          <text class="label">租金</text>
+          <input wx:if="{{editing}}" class="input" type="digit" data-field="rent" value="{{formData.rent}}" bindinput="onInput"/>
+          <text wx:else class="value">¥{{room.rent}}/月</text>
+        </view>
+      </view>
+
+      <view class="save-btn" wx:if="{{editing}}" bindtap="save">保存修改</view>
+    </view>
+
+    <!-- 当前租客 -->
+    <view class="section" wx:if="{{room.currentTenant}}">
+      <view class="section-header">
+        <text class="section-title">当前租客</text>
+      </view>
+      <view class="tenant-info">
+        <view class="tenant-item">
+          <text class="label">姓名</text>
+          <text class="value">{{room.currentTenant.name}}</text>
+        </view>
+        <view class="tenant-item">
+          <text class="label">电话</text>
+          <text class="value">{{room.currentTenant.phone}}</text>
+        </view>
+        <view class="tenant-item">
+          <text class="label">入住时间</text>
+          <text class="value">{{room.currentTenant.checkInAt}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 最近账单 -->
+    <view class="section" wx:if="{{room.recentBills && room.recentBills.length > 0}}">
+      <view class="section-header">
+        <text class="section-title">最近账单</text>
+      </view>
+      <view class="bill-list">
+        <view class="bill-item" wx:for="{{room.recentBills}}" wx:key="id">
+          <view class="bill-left">
+            <text class="bill-type">{{item.type}}</text>
+            <text class="bill-period">{{item.periodStart}} ~ {{item.periodEnd}}</text>
+          </view>
+          <view class="bill-right">
+            <text class="bill-amount">¥{{item.amount}}</text>
+            <text class="bill-status status-{{item.status}}">{{item.status === 'paid' ? '已付' : '未付'}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 删除按钮 -->
+    <view class="delete-btn" bindtap="delete">删除房间</view>
+  </view>
+
+  <!-- 加载中 -->
+  <view class="loading" wx:if="{{loading}}">
+    <text>加载中...</text>
+  </view>
+</view>

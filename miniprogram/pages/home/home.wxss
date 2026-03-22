@@ -1,0 +1,260 @@
+/* pages/home/home.wxss */
+page {
+  background: #f5f5f5;
+}
+
+.home-page {
+  min-height: 100vh;
+  padding-bottom: 40rpx;
+}
+
+/* 顶部欢迎区 */
+.header-section {
+  background: linear-gradient(135deg, #1890ff 0%, #096dd9 100%);
+  padding: 30rpx;
+  padding-top: calc(30rpx + var(--status-bar-height, 0));
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  padding-top: 20rpx;
+}
+
+.avatar {
+  width: 96rpx;
+  height: 96rpx;
+  border-radius: 50%;
+  border: 4rpx solid rgba(255,255,255,0.3);
+}
+
+.user-text {
+  flex: 1;
+  margin-left: 24rpx;
+  display: flex;
+  flex-direction: column;
+}
+
+.welcome {
+  font-size: 36rpx;
+  font-weight: 600;
+  color: #fff;
+}
+
+.sub-welcome {
+  font-size: 26rpx;
+  color: rgba(255,255,255,0.8);
+  margin-top: 8rpx;
+}
+
+.notification-icon {
+  width: 72rpx;
+  height: 72rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255,255,255,0.2);
+  border-radius: 50%;
+}
+
+/* 数据概览卡片 */
+.overview-card {
+  background: #fff;
+  margin: -60rpx 24rpx 24rpx;
+  border-radius: 24rpx;
+  padding: 30rpx;
+  box-shadow: 0 8rpx 24rpx rgba(0,0,0,0.08);
+  position: relative;
+  z-index: 10;
+}
+
+.overview-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30rpx;
+}
+
+.overview-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #333;
+}
+
+.overview-subtitle {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.overview-stats {
+  display: flex;
+  justify-content: space-between;
+}
+
+.overview-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+}
+
+.overview-num {
+  font-size: 40rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.overview-label {
+  font-size: 24rpx;
+  color: #999;
+  margin-top: 8rpx;
+}
+
+.text-success { color: #52c41a !important; }
+.text-primary { color: #1890ff !important; }
+.text-warning { color: #faad14 !important; }
+.text-danger { color: #ff4d4f !important; }
+
+/* 功能菜单 */
+.menu-section {
+  padding: 0 24rpx;
+}
+
+.menu-grid {
+  display: flex;
+  flex-wrap: wrap;
+  background: #fff;
+  border-radius: 24rpx;
+  padding: 20rpx;
+}
+
+.menu-item {
+  width: 25%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20rpx 0;
+}
+
+.menu-icon {
+  width: 96rpx;
+  height: 96rpx;
+  border-radius: 24rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12rpx;
+}
+
+.bg-blue { background: linear-gradient(135deg, #1890ff 0%, #69b1ff 100%); }
+.bg-green { background: linear-gradient(135deg, #52c41a 0%, #95de64 100%); }
+.bg-orange { background: linear-gradient(135deg, #faad14 0%, #ffc53d 100%); }
+.bg-purple { background: linear-gradient(135deg, #722ed1 0%, #b37feb 100%); }
+
+.menu-name {
+  font-size: 26rpx;
+  color: #666;
+}
+
+/* 快捷操作 */
+.quick-section {
+  padding: 24rpx;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #333;
+}
+
+.more-btn {
+  font-size: 26rpx;
+  color: #999;
+}
+
+.quick-list {
+  display: flex;
+  background: #fff;
+  border-radius: 20rpx;
+  padding: 20rpx;
+}
+
+.quick-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20rpx;
+}
+
+.quick-item text {
+  font-size: 24rpx;
+  color: #666;
+  margin-top: 12rpx;
+}
+
+/* 最近动态 */
+.recent-section {
+  padding: 0 24rpx;
+}
+
+.activity-list {
+  background: #fff;
+  border-radius: 20rpx;
+  padding: 24rpx;
+}
+
+.activity-item {
+  display: flex;
+  padding: 20rpx 0;
+  border-bottom: 1rpx solid #f5f5f5;
+}
+
+.activity-item:last-child {
+  border-bottom: none;
+}
+
+.activity-dot {
+  width: 16rpx;
+  height: 16rpx;
+  border-radius: 50%;
+  margin-top: 10rpx;
+  margin-right: 20rpx;
+  flex-shrink: 0;
+}
+
+.activity-dot.rent { background: #52c41a; }
+.activity-dot.bill { background: #1890ff; }
+.activity-dot.tenant { background: #faad14; }
+.activity-dot.room { background: #722ed1; }
+
+.activity-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.activity-text {
+  font-size: 28rpx;
+  color: #333;
+}
+
+.activity-time {
+  font-size: 24rpx;
+  color: #999;
+  margin-top: 8rpx;
+}
+
+.empty-activity {
+  text-align: center;
+  padding: 40rpx;
+  color: #999;
+  font-size: 26rpx;
+}

@@ -1,0 +1,67 @@
+<!--pages/room/add.wxml-->
+<view class="add-page">
+  <view class="form-card">
+    <view class="form-item">
+      <text class="label">房间号 *</text>
+      <input 
+        class="input" 
+        placeholder="请输入房间号，如 301" 
+        data-field="roomNumber"
+        value="{{formData.roomNumber}}"
+        bindinput="onInput"
+      />
+    </view>
+
+    <view class="form-item">
+      <text class="label">楼层</text>
+      <input 
+        class="input" 
+        type="number"
+        placeholder="请输入楼层" 
+        data-field="floor"
+        value="{{formData.floor}}"
+        bindinput="onInput"
+      />
+    </view>
+
+    <view class="form-item">
+      <text class="label">面积 (㎡) *</text>
+      <input 
+        class="input" 
+        type="digit"
+        placeholder="请输入面积" 
+        data-field="area"
+        value="{{formData.area}}"
+        bindinput="onInput"
+      />
+    </view>
+
+    <view class="form-item">
+      <text class="label">租金 (元/月) *</text>
+      <input 
+        class="input" 
+        type="digit"
+        placeholder="请输入月租金" 
+        data-field="rent"
+        value="{{formData.rent}}"
+        bindinput="onInput"
+      />
+    </view>
+
+    <view class="form-item">
+      <text class="label">备注</text>
+      <textarea 
+        class="textarea" 
+        placeholder="请输入备注信息（选填）" 
+        data-field="description"
+        value="{{formData.description}}"
+        bindinput="onInput"
+      />
+    </view>
+  </view>
+
+  <!-- 提交按钮 -->
+  <view class="submit-btn" bindtap="submit">
+    确认添加
+  </view>
+</view>

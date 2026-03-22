@@ -1,0 +1,196 @@
+/* pages/tenant/tenant.wxss */
+.tenant-page {
+  min-height: 100vh;
+  background: #f5f5f5;
+  padding-bottom: 40rpx;
+}
+
+/* 搜索栏 */
+.search-bar {
+  padding: 20rpx 24rpx;
+  background: #fff;
+}
+
+.search-input {
+  display: flex;
+  align-items: center;
+  background: #f5f5f5;
+  border-radius: 40rpx;
+  padding: 0 30rpx;
+  height: 72rpx;
+}
+
+.search-input input {
+  flex: 1;
+  margin-left: 16rpx;
+  font-size: 28rpx;
+}
+
+/* 统计卡片 */
+.stats-card {
+  display: flex;
+  background: #fff;
+  padding: 30rpx;
+  margin: 0 24rpx 20rpx;
+  border-radius: 16rpx;
+  box-shadow: 0 4rpx 12rpx rgba(0,0,0,0.05);
+}
+
+.stats-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.stats-num {
+  font-size: 44rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.stats-label {
+  font-size: 26rpx;
+  color: #999;
+  margin-top: 8rpx;
+}
+
+.text-success { color: #52c41a !important; }
+
+/* 租客列表 */
+.tenant-list {
+  padding: 0 24rpx;
+}
+
+.tenant-card {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 24rpx;
+  margin-bottom: 16rpx;
+  box-shadow: 0 2rpx 8rpx rgba(0,0,0,0.04);
+}
+
+.tenant-avatar {
+  width: 88rpx;
+  height: 88rpx;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #1890ff 0%, #096dd9 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 20rpx;
+}
+
+.tenant-avatar text {
+  font-size: 36rpx;
+  color: #fff;
+  font-weight: 600;
+}
+
+.tenant-info {
+  flex: 1;
+}
+
+.tenant-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8rpx;
+}
+
+.tenant-name {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #333;
+  margin-right: 16rpx;
+}
+
+.tenant-tag {
+  font-size: 22rpx;
+  padding: 4rpx 12rpx;
+  border-radius: 8rpx;
+}
+
+.tenant-tag.active {
+  background: #e6f7ff;
+  color: #1890ff;
+}
+
+.tenant-tag.inactive {
+  background: #f5f5f5;
+  color: #999;
+}
+
+.tenant-detail {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8rpx;
+}
+
+.detail-item {
+  font-size: 26rpx;
+  color: #666;
+}
+
+.detail-divider {
+  margin: 0 16rpx;
+  color: #ddd;
+}
+
+.tenant-rent {
+  display: flex;
+  font-size: 24rpx;
+  color: #999;
+}
+
+.check-in-date {
+  margin-left: 24rpx;
+}
+
+.tenant-arrow {
+  margin-left: 16rpx;
+}
+
+/* 空状态 */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 100rpx 0;
+}
+
+.empty-icon {
+  width: 240rpx;
+  height: 240rpx;
+  opacity: 0.5;
+}
+
+.empty-text {
+  font-size: 28rpx;
+  color: #999;
+  margin-top: 20rpx;
+}
+
+/* 加载更多 */
+.load-more {
+  text-align: center;
+  padding: 30rpx;
+  color: #999;
+  font-size: 26rpx;
+}
+
+/* 浮动按钮 */
+.fab {
+  position: fixed;
+  right: 30rpx;
+  bottom: 60rpx;
+  width: 100rpx;
+  height: 100rpx;
+  background: #1890ff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8rpx 24rpx rgba(24,144,255,0.4);
+}

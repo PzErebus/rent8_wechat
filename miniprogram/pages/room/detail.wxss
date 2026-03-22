@@ -1,0 +1,172 @@
+/* pages/room/detail.wxss */
+.detail-page {
+  min-height: 100vh;
+  background: #f6f6f6;
+  padding: 30rpx;
+}
+
+.detail-card {
+  background: #fff;
+  border-radius: 12rpx;
+  overflow: hidden;
+}
+
+.section {
+  padding: 30rpx;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24rpx;
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #333;
+}
+
+.edit-btn {
+  font-size: 28rpx;
+  color: #1890ff;
+}
+
+.info-grid {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.info-item {
+  width: 50%;
+  margin-bottom: 24rpx;
+  box-sizing: border-box;
+}
+
+.info-item .label {
+  display: block;
+  font-size: 26rpx;
+  color: #999;
+  margin-bottom: 8rpx;
+}
+
+.info-item .value {
+  font-size: 30rpx;
+  color: #333;
+}
+
+.info-item .input {
+  width: 100%;
+  height: 72rpx;
+  background: #f6f6f6;
+  border-radius: 8rpx;
+  padding: 0 16rpx;
+  font-size: 30rpx;
+}
+
+.status-available { color: #52c41a !important; }
+.status-rented { color: #1890ff !important; }
+.status-paid { color: #52c41a !important; }
+.status-unpaid { color: #ff4d4f !important; }
+
+.save-btn {
+  height: 80rpx;
+  line-height: 80rpx;
+  text-align: center;
+  background: #1890ff;
+  color: #fff;
+  border-radius: 40rpx;
+  font-size: 28rpx;
+  margin-top: 20rpx;
+}
+
+/* 租客信息 */
+.tenant-info {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.tenant-item {
+  width: 50%;
+  margin-bottom: 20rpx;
+}
+
+.tenant-item .label {
+  display: block;
+  font-size: 26rpx;
+  color: #999;
+  margin-bottom: 8rpx;
+}
+
+.tenant-item .value {
+  font-size: 30rpx;
+  color: #333;
+}
+
+/* 账单列表 */
+.bill-list {
+  margin-top: 10rpx;
+}
+
+.bill-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20rpx 0;
+  border-bottom: 1rpx solid #f5f5f5;
+}
+
+.bill-item:last-child {
+  border-bottom: none;
+}
+
+.bill-left {
+  display: flex;
+  flex-direction: column;
+}
+
+.bill-type {
+  font-size: 28rpx;
+  color: #333;
+}
+
+.bill-period {
+  font-size: 24rpx;
+  color: #999;
+  margin-top: 4rpx;
+}
+
+.bill-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.bill-amount {
+  font-size: 30rpx;
+  color: #333;
+  font-weight: 500;
+}
+
+.bill-status {
+  font-size: 24rpx;
+  margin-top: 4rpx;
+}
+
+/* 删除按钮 */
+.delete-btn {
+  height: 88rpx;
+  line-height: 88rpx;
+  text-align: center;
+  color: #ff4d4f;
+  font-size: 30rpx;
+  border-top: 1rpx solid #f0f0f0;
+}
+
+.loading {
+  text-align: center;
+  padding: 60rpx;
+  color: #999;
+}

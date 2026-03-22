@@ -1,0 +1,65 @@
+<view class="tenant-page">
+  <!-- 搜索栏 -->
+  <view class="search-bar">
+    <view class="search-input">
+      <t-icon name="search" size="32rpx" color="#999"/>
+      <input placeholder="搜索租客姓名/电话/房间" bindconfirm="onSearch" confirm-type="search"/>
+    </view>
+  </view>
+
+  <!-- 统计卡片 -->
+  <view class="stats-card">
+    <view class="stats-item">
+      <text class="stats-num">{{stats.total}}</text>
+      <text class="stats-label">租客总数</text>
+    </view>
+    <view class="stats-item">
+      <text class="stats-num text-success">{{stats.active}}</text>
+      <text class="stats-label">在住</text>
+    </view>
+  </view>
+
+  <!-- 租客列表 -->
+  <view class="tenant-list">
+    <view class="tenant-card" wx:for="{{tenants}}" wx:key="id" bindtap="goDetail" data-id="{{item.id}}">
+      <view class="tenant-avatar">
+        <text>{{item.name ? item.name.substring(0, 1) : '?'}}</text>
+      </view>
+      <view class="tenant-info">
+        <view class="tenant-header">
+          <text class="tenant-name">{{item.name}}</text>
+          <text class="tenant-tag {{item.status}}">{{item.status === 'active' ? '在住' : '已退租'}}</text>
+        </view>
+        <view class="tenant-detail">
+          <text class="detail-item">{{item.phone}}</text>
+          <text class="detail-divider">|</text>
+          <text class="detail-item">{{item.roomNumber}}</text>
+        </view>
+        <view class="tenant-rent">
+          <text>租金: ¥{{item.rent}}/月</text>
+          <text class="check-in-date">入住: {{item.checkInDate}}</text>
+        </view>
+      </view>
+      <view class="tenant-arrow">
+        <t-icon name="chevron-right" size="40rpx" color="#ccc"/>
+      </view>
+    </view>
+
+    <!-- 空状态 -->
+    <view class="empty-state" wx:if="{{tenants.length === 0 && !loading}}">
+      <image src="/images/rent.png" class="empty-icon"/>
+      <text class="empty-text">暂无租客数据</text>
+    </view>
+
+    <!-- 加载更多 -->
+    <view class="load-more" wx:if="{{tenants.length > 0}}">
+      <text wx:if="{{loading}}">加载中...</text>
+      <text wx:elif="{{!hasMore}}">没有更多了</text>
+    </view>
+  </view>
+
+  <!-- 添加按钮 -->
+  <view class="fab" bindtap="goAdd">
+    <t-icon name="add" size="48rpx" color="#fff"/>
+  </view>
+</view>

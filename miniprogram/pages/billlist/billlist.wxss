@@ -1,0 +1,25 @@
+/* pages/billlist/billlist.wxss */
+.bill-page { min-height: 100vh; background: #f6f6f6; padding-bottom: 120rpx; }
+.stats-card { display: flex; justify-content: space-around; padding: 30rpx; background: linear-gradient(135deg, #52c41a 0%, #389e0d 100%); }
+.stats-item { display: flex; flex-direction: column; align-items: center; }
+.stats-num { font-size: 36rpx; font-weight: bold; color: #fff; }
+.stats-label { font-size: 24rpx; color: rgba(255,255,255,0.8); margin-top: 8rpx; }
+.text-danger { color: #ff4d4f !important; }
+.month-picker { display: flex; align-items: center; justify-content: center; padding: 20rpx; background: #fff; margin: 20rpx; border-radius: 12rpx; }
+.month-picker text { font-size: 30rpx; font-weight: 500; margin-right: 8rpx; }
+.filter-tabs { display: flex; padding: 0 30rpx 20rpx; }
+.filter-tab { flex: 1; text-align: center; padding: 16rpx; font-size: 28rpx; color: #666; }
+.filter-tab.active { color: #52c41a; font-weight: 500; background: rgba(82,196,26,0.1); border-radius: 8rpx; }
+.bill-list { height: calc(100vh - 400rpx); padding: 0 20rpx; }
+.bill-card { background: #fff; border-radius: 12rpx; padding: 24rpx; margin-bottom: 20rpx; }
+.bill-header { display: flex; justify-content: space-between; margin-bottom: 16rpx; }
+.room-num { font-size: 30rpx; font-weight: 500; color: #333; }
+.bill-status { font-size: 24rpx; padding: 4rpx 12rpx; border-radius: 4rpx; }
+.status-paid { background: rgba(82,196,26,0.1); color: #52c41a; }
+.status-unpaid { background: rgba(255,77,79,0.1); color: #ff4d4f; }
+.bill-info { display: flex; justify-content: space-between; }
+.bill-type { font-size: 26rpx; color: #999; }
+.bill-amount { font-size: 32rpx; font-weight: 600; color: #333; }
+.load-more { text-align: center; padding: 30rpx; color: #999; font-size: 26rpx; }
+.empty { text-align: center; padding: 100rpx; color: #999; }
+.add-btn { position: fixed; right: 40rpx; bottom: 60rpx; width: 100rpx; height: 100rpx; background: #52c41a; border-radius: 50%; display: flex; align-items: center; justify-content: center; }

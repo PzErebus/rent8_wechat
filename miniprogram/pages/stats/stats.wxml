@@ -1,0 +1,63 @@
+<view class="stats-page">
+  <!-- 顶部统计 -->
+  <view class="header-stats">
+    <view class="header-item">
+      <text class="header-num">¥{{stats.yearIncome}}</text>
+      <text class="header-label">年收入</text>
+    </view>
+  </view>
+
+  <!-- 本月统计 -->
+  <view class="card">
+    <view class="card-title">本月数据</view>
+    <view class="stats-grid">
+      <view class="stat-item">
+        <text class="stat-num">{{stats.totalRooms}}</text>
+        <text class="stat-label">房间总数</text>
+      </view>
+      <view class="stat-item">
+        <text class="stat-num primary">{{stats.vacantRooms}}</text>
+        <text class="stat-label">空置</text>
+      </view>
+      <view class="stat-item">
+        <text class="stat-num success">{{stats.rentedRooms}}</text>
+        <text class="stat-label">已出租</text>
+      </view>
+      <view class="stat-item">
+        <text class="stat-num warning">{{stats.occupancyRate}}%</text>
+        <text class="stat-label">入住率</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 收支统计 -->
+  <view class="card">
+    <view class="card-title">收支情况</view>
+    <view class="stats-grid">
+      <view class="stat-item">
+        <text class="stat-num income">¥{{stats.monthIncome}}</text>
+        <text class="stat-label">本月收入</text>
+      </view>
+      <view class="stat-item">
+        <text class="stat-num expense">¥{{stats.monthExpense}}</text>
+        <text class="stat-label">本月支出</text>
+      </view>
+      <view class="stat-item">
+        <text class="stat-num profit">¥{{stats.monthIncome - stats.monthExpense}}</text>
+        <text class="stat-label">本月利润</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 租客统计 -->
+  <view class="card">
+    <view class="card-title">租客统计</view>
+    <view class="tenant-stat">
+      <view class="tenant-icon">👥</view>
+      <view class="tenant-info">
+        <text class="tenant-num">{{stats.totalTenants}}</text>
+        <text class="tenant-label">在租租客</text>
+      </view>
+    </view>
+  </view>
+</view>

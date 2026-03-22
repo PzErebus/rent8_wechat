@@ -1,0 +1,112 @@
+<view class="home-page">
+  <!-- 顶部欢迎区 -->
+  <view class="header-section">
+    <view class="user-info">
+      <image class="avatar" src="{{userInfo.avatar || '/images/rent.png'}}" mode="aspectFill"/>
+      <view class="user-text">
+        <text class="welcome">你好，{{userInfo.nickname || '房东'}}</text>
+        <text class="sub-welcome">{{currentDate}} {{greeting}}</text>
+      </view>
+      <view class="notification-icon" bindtap="goNotification">
+        <t-icon name="notification" size="44rpx" color="#fff"/>
+      </view>
+    </view>
+  </view>
+
+  <!-- 数据概览卡片 -->
+  <view class="overview-card">
+    <view class="overview-header">
+      <text class="overview-title">数据概览</text>
+      <text class="overview-subtitle">本月数据</text>
+    </view>
+    <view class="overview-stats">
+      <view class="overview-item">
+        <text class="overview-num">{{stats.totalRooms}}</text>
+        <text class="overview-label">房间总数</text>
+      </view>
+      <view class="overview-item">
+        <text class="overview-num text-success">{{stats.vacantRooms}}</text>
+        <text class="overview-label">空置房间</text>
+      </view>
+      <view class="overview-item">
+        <text class="overview-num text-primary">{{stats.rentedRooms}}</text>
+        <text class="overview-label">已出租</text>
+      </view>
+      <view class="overview-item">
+        <text class="overview-num text-warning">¥{{stats.monthIncome}}</text>
+        <text class="overview-label">本月收入</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 功能菜单 -->
+  <view class="menu-section">
+    <view class="menu-grid">
+      <view class="menu-item" bindtap="goRoom" data-type="all">
+        <view class="menu-icon bg-blue">
+          <t-icon name="home" size="48rpx" color="#fff"/>
+        </view>
+        <text class="menu-name">房间管理</text>
+      </view>
+      <view class="menu-item" bindtap="goBill">
+        <view class="menu-icon bg-green">
+          <t-icon name="bill" size="48rpx" color="#fff"/>
+        </view>
+        <text class="menu-name">账单管理</text>
+      </view>
+      <view class="menu-item" bindtap="goTenant">
+        <view class="menu-icon bg-orange">
+          <t-icon name="user" size="48rpx" color="#fff"/>
+        </view>
+        <text class="menu-name">租客管理</text>
+      </view>
+      <view class="menu-item" bindtap="goStats">
+        <view class="menu-icon bg-purple">
+          <t-icon name="chart" size="48rpx" color="#fff"/>
+        </view>
+        <text class="menu-name">数据统计</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 快捷操作 -->
+  <view class="quick-section">
+    <view class="section-header">
+      <text class="section-title">快捷操作</text>
+    </view>
+    <view class="quick-list">
+      <view class="quick-item" bindtap="goAddRoom">
+        <t-icon name="add-circle" size="40rpx" color="#1890ff"/>
+        <text>添加房间</text>
+      </view>
+      <view class="quick-item" bindtap="goAddBill">
+        <t-icon name="add-circle" size="40rpx" color="#52c41a"/>
+        <text>创建账单</text>
+      </view>
+      <view class="quick-item" bindtap="goAddTenant">
+        <t-icon name="user-add" size="40rpx" color="#faad14"/>
+        <text>添加租客</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 最近动态 -->
+  <view class="recent-section">
+    <view class="section-header">
+      <text class="section-title">最近动态</text>
+      <text class="more-btn" bindtap="goActivity">更多 ></text>
+    </view>
+    <view class="activity-list">
+      <view class="activity-item" wx:for="{{activities}}" wx:key="id">
+        <view class="activity-dot {{item.type}}"></view>
+        <view class="activity-content">
+          <text class="activity-text">{{item.content}}</text>
+          <text class="activity-time">{{item.time}}</text>
+        </view>
+      </view>
+      <view class="empty-activity" wx:if="{{activities.length === 0}}">
+        <text>暂无最新动态</text>
+      </view>
+    </view>
+  </view>
+</view>

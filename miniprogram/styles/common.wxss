@@ -1,0 +1,303 @@
+/**
+ * rent8 统一样式规范
+ * 设计理念：简洁、现代、实用
+ */
+
+/* ==================== 主题色 ==================== */
+:root {
+  /* 主色调 */
+  --primary: #1890ff;        /* 主色-蓝色 */
+  --primary-light: #e6f7ff; /* 主色浅色背景 */
+  --primary-dark: #096dd9;  /* 主色深色 */
+  
+  /* 辅助色 */
+  --success: #52c41a;        /* 成功-绿色 */
+  --success-light: #f6ffed;
+  --warning: #faad14;        /* 警告-橙色 */
+  --warning-light: #fffbe6;
+  --danger: #ff4d4f;         /* 错误-红色 */
+  --danger-light: #fff2f0;
+  --info: #1890ff;          /* 信息-蓝色 */
+  
+  /* 中性色 */
+  --text-primary: #333333;   /* 主要文字 */
+  --text-secondary: #666666;  /* 次要文字 */
+  --text-placeholder: #999999;/*  placeholder */
+  --text-disabled: #cccccc;   /* 禁用文字 */
+  
+  /* 背景色 */
+  --bg-page: #f5f5f5;       /* 页面背景 */
+  --bg-card: #ffffff;        /* 卡片背景 */
+  --bg-mask: rgba(0,0,0,0.5); /* 遮罩 */
+  
+  /* 边框色 */
+  --border-color: #eeeeee;
+  --border-light: #f5f5f5;
+}
+
+/* ==================== 通用样式 ==================== */
+.page-container {
+  min-height: 100vh;
+  background: var(--bg-page);
+  padding-bottom: 120rpx;
+}
+
+/* 卡片 */
+.card {
+  background: var(--bg-card);
+  border-radius: 16rpx;
+  padding: 24rpx;
+  margin: 20rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0,0,0,0.05);
+}
+
+/* 标题 */
+.title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.sub-title {
+  font-size: 26rpx;
+  color: var(--text-secondary);
+}
+
+/* ==================== 按钮样式 ==================== */
+.btn-primary {
+  background: linear-gradient(135deg, #1890ff 0%, #096dd9 100%);
+  color: #fff;
+  border-radius: 44rpx;
+  height: 88rpx;
+  line-height: 88rpx;
+  text-align: center;
+  font-size: 32rpx;
+  font-weight: 500;
+  box-shadow: 0 8rpx 24rpx rgba(24,144,255,0.3);
+}
+
+.btn-primary:active {
+  opacity: 0.9;
+}
+
+.btn-secondary {
+  background: #fff;
+  color: var(--primary);
+  border: 2rpx solid var(--primary);
+  border-radius: 44rpx;
+  height: 84rpx;
+  line-height: 84rpx;
+  text-align: center;
+  font-size: 32rpx;
+}
+
+.btn-danger {
+  background: linear-gradient(135deg, #ff4d4f 0%, #cf3537 100%);
+  color: #fff;
+  border-radius: 44rpx;
+  height: 88rpx;
+  line-height: 88rpx;
+  text-align: center;
+  font-size: 32rpx;
+}
+
+/* ==================== 输入框 ==================== */
+.input-wrapper {
+  background: #f6f6f6;
+  border-radius: 12rpx;
+  padding: 0 24rpx;
+  height: 88rpx;
+  display: flex;
+  align-items: center;
+}
+
+.input-wrapper input {
+  flex: 1;
+  height: 100%;
+  font-size: 28rpx;
+}
+
+.input-label {
+  font-size: 28rpx;
+  color: var(--text-primary);
+  margin-bottom: 16rpx;
+  font-weight: 500;
+}
+
+/* ==================== 标签 ==================== */
+.tag {
+  display: inline-block;
+  padding: 6rpx 16rpx;
+  border-radius: 20rpx;
+  font-size: 24rpx;
+}
+
+.tag-primary {
+  background: var(--primary-light);
+  color: var(--primary);
+}
+
+.tag-success {
+  background: var(--success-light);
+  color: var(--success);
+}
+
+.tag-warning {
+  background: var(--warning-light);
+  color: var(--warning);
+}
+
+.tag-danger {
+  background: var(--danger-light);
+  color: var(--danger);
+}
+
+/* ==================== 统计卡片 ==================== */
+.stats-grid {
+  display: flex;
+  justify-content: space-between;
+  padding: 30rpx;
+  background: linear-gradient(135deg, #1890ff 0%, #096dd9 100%);
+  border-radius: 0 0 32rpx 32rpx;
+}
+
+.stats-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+}
+
+.stats-num {
+  font-size: 40rpx;
+  font-weight: bold;
+  color: #fff;
+}
+
+.stats-label {
+  font-size: 24rpx;
+  color: rgba(255,255,255,0.8);
+  margin-top: 8rpx;
+}
+
+/* ==================== 列表项 ==================== */
+.list-item {
+  display: flex;
+  align-items: center;
+  padding: 24rpx;
+  background: #fff;
+  border-radius: 12rpx;
+  margin-bottom: 16rpx;
+}
+
+.list-item-left {
+  flex: 1;
+}
+
+.list-item-title {
+  font-size: 30rpx;
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.list-item-desc {
+  font-size: 26rpx;
+  color: var(--text-secondary);
+  margin-top: 8rpx;
+}
+
+.list-item-right {
+  color: var(--text-placeholder);
+}
+
+/* ==================== 筛选标签 ==================== */
+.filter-bar {
+  display: flex;
+  padding: 20rpx 30rpx;
+  background: #fff;
+  margin: 20rpx;
+  border-radius: 16rpx;
+}
+
+.filter-tab {
+  flex: 1;
+  text-align: center;
+  padding: 16rpx 0;
+  font-size: 28rpx;
+  color: var(--text-secondary);
+  border-radius: 12rpx;
+  transition: all 0.2s;
+}
+
+.filter-tab.active {
+  color: var(--primary);
+  background: var(--primary-light);
+  font-weight: 500;
+}
+
+/* ==================== 空状态 ==================== */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 100rpx 0;
+}
+
+.empty-icon {
+  width: 240rpx;
+  height: 240rpx;
+  opacity: 0.5;
+}
+
+.empty-text {
+  font-size: 28rpx;
+  color: var(--text-placeholder);
+  margin-top: 20rpx;
+}
+
+/* ==================== 加载更多 ==================== */
+.load-more {
+  text-align: center;
+  padding: 30rpx;
+  color: var(--text-placeholder);
+  font-size: 26rpx;
+}
+
+/* ==================== 底部操作栏 ==================== */
+.bottom-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 20rpx 30rpx;
+  padding-bottom: calc(20rpx + env(safe-area-inset-bottom));
+  background: #fff;
+  box-shadow: 0 -4rpx 16rpx rgba(0,0,0,0.05);
+  display: flex;
+  gap: 20rpx;
+}
+
+.bottom-bar .btn {
+  flex: 1;
+}
+
+/* ==================== 浮动按钮 ==================== */
+.fab {
+  position: fixed;
+  right: 30rpx;
+  bottom: calc(60rpx + env(safe-area-inset-bottom));
+  width: 100rpx;
+  height: 100rpx;
+  background: var(--primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8rpx 24rpx rgba(24,144,255,0.4);
+  z-index: 100;
+}
+
+.fab-hover:active {
+  transform: scale(0.95);
+}

@@ -1,46 +1,172 @@
-出租屋管理系统微信小程序版，免费使用，适合白嫖党，小白党！
+# Rent8 出租屋管理系统
 
-![最常用摸鱼助手](https://gitee.com/MarcoMaHH/picture/raw/master/project.jpg)
+一套现代化的出租屋管理系统，包含微信小程序（房东使用）和管理后台（系统管理员使用）。
 
----
+## 系统架构
 
-# rent8-最常用出租屋管理系统-微信小程序
+### 技术栈
 
-rent8-出租屋管理系统的微信小程序，基于Tdesign开发。另外，此小程序需要配合后端使用。
+| 层级 | 技术 |
+|------|------|
+| 后端 API | NestJS + TypeScript + Prisma |
+| 数据库 | PostgreSQL |
+| 缓存 | Redis |
+| 管理后台 | Nuxt 3 + Vue 3 + Element Plus |
+| 小程序 | 微信小程序原生框架 |
+| 部署 | Docker + Docker Compose |
 
-rent8后端地址：[rent8-最常用出租屋管理系统](https://gitee.com/MarcoMaHH/rent8)
+## 项目结构
 
-#### 技术栈
+```
+rent8_wechat/
+├── backend/              # NestJS 后端 API
+│   ├── src/
+│   │   ├── modules/      # 业务模块
+│   │   ├── prisma/       # Prisma ORM
+│   │   └── main.ts       # 入口文件
+│   ├── prisma/
+│   │   └── schema.prisma # 数据库模型
+│   └── Dockerfile
+├── admin/                # Nuxt 3 管理后台
+│   ├── pages/            # 页面
+│   ├── composables/      # 组合式函数
+│   └── Dockerfile
+├── miniprogram/          # 微信小程序
+│   ├── pages/            # 页面
+│   └── app.js            # 小程序入口
+├── nginx/                # Nginx 配置
+│   └── nginx.conf
+└── docker-compose.yml    # Docker 编排
+```
 
-- Tdesign
+## 快速开始
 
-#### 界面及功能展示
+### 环境要求
 
-![首页](https://gitee.com/MarcoMaHH/picture/raw/master/rent8_wechat/index.jpg)
+- Docker 20.10+
+- Docker Compose 2.0+
+- Node.js 20+ (开发环境)
 
-![登录页面](https://gitee.com/MarcoMaHH/picture/raw/master/rent8_wechat/login.jpg)
+### 使用 Docker 部署
 
-![房间管理页面](https://gitee.com/MarcoMaHH/picture/raw/master/rent8_wechat/number.jpg)
+1. 克隆项目
+```bash
+git clone <your-repo>
+cd rent8_wechat
+```
 
-![未收账单页面](https://gitee.com/MarcoMaHH/picture/raw/master/rent8_wechat/uncollected.jpg)
+2. 配置环境变量
+```bash
+# 复制环境变量模板
+cp backend/.env.example backend/.env
 
-![收据页面](https://gitee.com/MarcoMaHH/picture/raw/master/rent8_wechat/receipt.jpg)
+# 编辑 .env 文件，配置以下参数：
+# - WECHAT_APPID: 微信小程序 AppID
+# - WECHAT_SECRET: 微信小程序 AppSecret
+# - JWT_SECRET: JWT 密钥（生产环境请修改）
+```
 
-#### 安装步骤
+3. 启动服务
+```bash
+docker-compose up -d
+```
 
-PS: 需先安装Node.js
+4. 初始化数据库
+```bash
+# 执行数据库迁移
+docker-compose exec backend npx prisma migrate dev
 
-1. `git clone https://gitee.com/MarcoMaHH/rent8_wechat.git`
+# 生成 Prisma 客户端
+docker-compose exec backend npx prisma generate
+```
 
-2. `cd rent8_wechat`
+5. 访问系统
+- 管理后台: http://localhost
+- API 文档: http://localhost/api/docs
+- 默认管理员账号: admin / Rent8@Admin2024!
 
-3. `npm install`
+### 开发环境
 
-4. 安装完之后，在微信开发者工具中设置appid
+#### 后端开发
 
-5. 在微信开发者工具中对 npm 进行构建：工具 - 构建 npm
+```bash
+cd backend
 
-6. 根据后端访问地址，修改app.js文件中的apiUrl变量
+# 安装依赖
+npm install
 
-7. 调试代码时，在微信开发者工具中，选中“不校验合法域名、web-wiew（业务域名）、TLS版本以及HTTPS证书”
+# 配置环境变量
+cp .env.example .env
 
+# 启动开发服务器
+npm run start:dev
+```
+
+#### 管理后台开发
+
+```bash
+cd admin
+
+# 安装依赖
+npm install
+
+# 启动开发服务器
+npm run dev
+```
+
+## 功能特性
+
+### 管理后台
+
+- 📊 数据概览仪表盘
+- 👥 用户管理（试用/正式用户）
+- 💰 订单管理
+- 📝 操作日志
+- ⚙️ 系统设置
+
+### 小程序（房东端）
+
+- 🏠 房间管理
+- 👤 租客管理
+- 💵 账单管理
+- 📈 数据统计
+- 👤 个人中心
+
+## API 文档
+
+启动服务后访问: http://localhost/api/docs
+
+## 系统架构图
+
+```
+┌─────────────────┐     ┌─────────────────┐     ┌─────────────────┐
+│   微信小程序    │────▶│   Nginx 代理    │────▶│  NestJS 后端    │
+│   (房东使用)    │     │                 │     │                 │
+└─────────────────┘     └─────────────────┘     └────────┬────────┘
+                                                         │
+                              ┌──────────────────────────┼──────────┐
+                              │                          │          │
+                              ▼                          ▼          ▼
+                    ┌─────────────────┐        ┌─────────────────┐
+                    │   PostgreSQL    │        │     Redis       │
+                    │    (主数据库)   │        │    (缓存)       │
+                    └─────────────────┘        └─────────────────┘
+                                                         │
+                              ┌──────────────────────────┘
+                              ▼
+                    ┌─────────────────┐
+                    │  Nuxt 3 管理后台 │
+                    │ (系统管理员使用) │
+                    └─────────────────┘
+```
+
+## 安全说明
+
+- 生产环境请务必修改默认密码和 JWT 密钥
+- 建议使用 HTTPS 部署
+- 定期备份数据库
+- 启用防火墙限制端口访问
+
+## 许可证
+
+MIT License

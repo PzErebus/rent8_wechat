@@ -1,0 +1,92 @@
+<!--pages/room/room.wxml-->
+<view class="room-page">
+  <!-- 统计卡片 -->
+  <view class="stats-card">
+    <view class="stats-item">
+      <text class="stats-num">{{stats.total}}</text>
+      <text class="stats-label">房间总数</text>
+    </view>
+    <view class="stats-item">
+      <text class="stats-num text-success">{{stats.vacant}}</text>
+      <text class="stats-label">空置</text>
+    </view>
+    <view class="stats-item">
+      <text class="stats-num text-primary">{{stats.occupied}}</text>
+      <text class="stats-label">已出租</text>
+    </view>
+    <view class="stats-item">
+      <text class="stats-num text-warning">¥{{stats.monthIncome}}</text>
+      <text class="stats-label">本月收入</text>
+    </view>
+  </view>
+
+  <!-- 筛选标签 -->
+  <view class="filter-tabs">
+    <view 
+      class="filter-tab {{status === '' ? 'active' : ''}}" 
+      data-status="" 
+      bindtap="onFilterChange">
+      全部
+    </view>
+    <view 
+      class="filter-tab {{status === 'available' ? 'active' : ''}}" 
+      data-status="available" 
+      bindtap="onFilterChange">
+      空置
+    </view>
+    <view 
+      class="filter-tab {{status === 'rented' ? 'active' : ''}}" 
+      data-status="rented" 
+      bindtap="onFilterChange">
+      已出租
+    </view>
+  </view>
+
+  <!-- 房间列表 -->
+  <scroll-view scroll-y class="room-list">
+    <view 
+      class="room-card" 
+      wx:for="{{rooms}}" 
+      wx:key="id" 
+      bindtap="goDetail" 
+      data-id="{{item.id}}">
+      <view class="room-header">
+        <text class="room-number">{{item.roomNumber}}</text>
+        <text class="room-status {{item.status === 'available' ? 'status-vacant' : 'status-rented'}}">
+          {{item.status === 'available' ? '空置' : '已出租'}}
+        </text>
+      </view>
+      <view class="room-info">
+        <view class="info-item">
+          <text class="label">租金</text>
+          <text class="value">¥{{item.rent}}/月</text>
+        </view>
+        <view class="info-item">
+          <text class="label">面积</text>
+          <text class="value">{{item.area}}㎡</text>
+        </view>
+        <view class="info-item">
+          <text class="label">租客</text>
+          <text class="value">{{item.tenantCount || 0}}人</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 加载更多 -->
+    <view class="load-more" wx:if="{{rooms.length > 0}}">
+      <text wx:if="{{loading}}">加载中...</text>
+      <text wx:elif="{{!hasMore}}">没有更多了</text>
+    </view>
+
+    <!-- 空状态 -->
+    <view class="empty" wx:if="{{rooms.length === 0 && !loading}}">
+      <image src="/images/rent.png" mode="aspectFit" class="empty-img"></image>
+      <text>暂无房间数据</text>
+    </view>
+  </scroll-view>
+
+  <!-- 添加按钮 -->
+  <view class="add-btn" bindtap="goAdd">
+    <t-icon name="add" size="48rpx" color="#fff"></t-icon>
+  </view>
+</view>

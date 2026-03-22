@@ -1,0 +1,75 @@
+<view class="detail-page">
+  <view class="detail-card" wx:if="{{tenant}}">
+    <!-- 基本信息 -->
+    <view class="section">
+      <view class="section-header">
+        <text class="section-title">基本信息</text>
+        <text class="edit-btn" bindtap="toggleEdit">{{editing ? '取消' : '编辑'}}</text>
+      </view>
+      <view class="info-grid">
+        <view class="info-item">
+          <text class="label">姓名</text>
+          <input wx:if="{{editing}}" class="input" data-field="name" value="{{formData.name}}" bindinput="onInput"/>
+          <text wx:else class="value">{{tenant.name}}</text>
+        </view>
+        <view class="info-item">
+          <text class="label">电话</text>
+          <view class="phone-wrap" wx:if="{{!editing}}">
+            <text class="value">{{tenant.phone}}</text>
+            <text class="call-btn" bindtap="callPhone">拨打</text>
+          </view>
+          <input wx:else class="input" data-field="phone" value="{{formData.phone}}" bindinput="onInput"/>
+        </view>
+      </view>
+    </view>
+
+    <!-- 租房信息 -->
+    <view class="section">
+      <view class="section-title">租房信息</view>
+      <view class="info-grid">
+        <view class="info-item">
+          <text class="label">房间号</text>
+          <text class="value">{{tenant.roomNumber}}</text>
+        </view>
+        <view class="info-item">
+          <text class="label">月租金</text>
+          <text class="value primary">¥{{tenant.rent}}</text>
+        </view>
+        <view class="info-item">
+          <text class="label">押金</text>
+          <text class="value">¥{{tenant.deposit}}</text>
+        </view>
+        <view class="info-item">
+          <text class="label">入住日期</text>
+          <text class="value">{{tenant.checkInDate}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 账单统计 -->
+    <view class="section">
+      <view class="section-title">账单统计</view>
+      <view class="bill-stats">
+        <view class="bill-stat-item">
+          <text class="stat-num success">{{tenant.paidBills}}</text>
+          <text class="stat-label">已付</text>
+        </view>
+        <view class="bill-stat-item">
+          <text class="stat-num danger">{{tenant.unpaidBills}}</text>
+          <text class="stat-label">未付</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 备注 -->
+    <view class="section" wx:if="{{tenant.remark}}">
+      <view class="section-title">备注</view>
+      <text class="remark">{{tenant.remark}}</text>
+    </view>
+
+    <view class="save-btn" wx:if="{{editing}}" bindtap="save">保存修改</view>
+    <view class="checkout-btn" bindtap="checkout">办理退房</view>
+  </view>
+
+  <view class="loading" wx:if="{{loading}}">加载中...</view>
+</view>

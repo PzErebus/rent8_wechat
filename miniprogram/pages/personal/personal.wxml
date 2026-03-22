@@ -1,14 +1,78 @@
 <!-- pages/personal/personal.wxml -->
-<button class="rent5-cell" bind:tap="onUseTap">
-  <t-cell title="使用说明" hover arrow />
-</button>
-<button class="rent5-cell" open-type="contact">
-  <t-cell title="联系管理员" hover arrow />
-</button>
-<button class="rent5-cell" open-type="share">
-  <t-cell title="分享好友" hover arrow />
-</button>
-<button class="rent5-cell" bind:tap="onExitTap">
-  <t-cell title="退出" hover arrow />
-</button>
+<view class="personal-container">
+  <!-- 用户信息卡片 -->
+  <view class="user-card">
+    <view class="user-header">
+      <image class="user-avatar" src="{{userInfo.avatar || '/images/rent.png'}}" mode="aspectFill"/>
+      <view class="user-info">
+        <view class="user-name">{{userInfo.nickname || '房东用户'}}</view>
+        <view class="user-phone">{{userInfo.phone || ''}}</view>
+      </view>
+    </view>
+    
+    <!-- 会员状态 -->
+    <view class="member-status">
+      <view class="status-badge {{userInfo.user_type === 'trial' ? 'trial' : 'formal'}}">
+        {{userInfo.user_type === 'trial' ? '试用会员' : '正式会员'}}
+      </view>
+      <view class="expire-info {{isExpired ? 'expired' : ''}}">
+        <text wx:if="!isExpired">有效期至：{{expireDate}}（剩余{{remainingDays}}天）</text>
+        <text wx:else>已过期，请续费</text>
+      </view>
+    </view>
+    
+    <!-- 统计信息 -->
+    <view class="stats-row">
+      <view class="stat-item">
+        <view class="stat-value">{{userInfo.room_count || 0}}</view>
+        <view class="stat-label">房间数</view>
+      </view>
+      <view class="stat-item">
+        <view class="stat-value">{{userInfo.tenant_count || 0}}</view>
+        <view class="stat-label">租客数</view>
+      </view>
+      <view class="stat-item">
+        <view class="stat-value">{{userInfo.login_count || 0}}</view>
+        <view class="stat-label">登录次数</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 功能菜单 -->
+  <view class="menu-section">
+    <view class="menu-title">功能菜单</view>
+    
+    <view class="menu-list">
+      <view class="menu-item" bind:tap="onUseTap">
+        <view class="menu-icon">📖</view>
+        <view class="menu-text">使用说明</view>
+        <view class="menu-arrow">›</view>
+      </view>
+      
+      <view class="menu-item" bind:tap="onRenewTap">
+        <view class="menu-icon">💎</view>
+        <view class="menu-text">续费升级</view>
+        <view class="menu-arrow">›</view>
+      </view>
+      
+      <button class="menu-item contact-btn" open-type="contact">
+        <view class="menu-icon">💬</view>
+        <view class="menu-text">联系客服</view>
+        <view class="menu-arrow">›</view>
+      </button>
+      
+      <button class="menu-item share-btn" open-type="share">
+        <view class="menu-icon">🔗</view>
+        <view class="menu-text">分享给好友</view>
+        <view class="menu-arrow">›</view>
+      </button>
+    </view>
+  </view>
+
+  <!-- 退出按钮 -->
+  <view class="exit-section">
+    <button class="exit-btn" bind:tap="onExitTap">退出登录</button>
+  </view>
+</view>
+
 <t-toast id="t-toast" />

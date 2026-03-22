@@ -1,21 +1,121 @@
 /* pages/login/login.wxss */
 
 page {
-    height: 90%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  height: 100%;
 }
 
-.rent-title {
-    font-size  : 24px;
-    font-weight: 700;
-    line-height: 32px;
-    margin     : 24px 16px 16px;
-    text-align : center;
+.login-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  padding: 60rpx 40rpx;
+  box-sizing: border-box;
 }
 
-.rent-height {
-    height: 65%;
+.login-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 80rpx;
+}
+
+.logo {
+  width: 160rpx;
+  height: 160rpx;
+  border-radius: 40rpx;
+  background: #fff;
+  padding: 20rpx;
+  box-shadow: 0 8rpx 32rpx rgba(0,0,0,0.1);
+}
+
+.title {
+  font-size: 48rpx;
+  font-weight: bold;
+  color: #fff;
+  margin-top: 40rpx;
+  text-shadow: 0 2rpx 4rpx rgba(0,0,0,0.1);
+}
+
+.subtitle {
+  font-size: 28rpx;
+  color: rgba(255,255,255,0.8);
+  margin-top: 16rpx;
+}
+
+.login-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.welcome-text {
+  font-size: 40rpx;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 16rpx;
+}
+
+.desc-text {
+  font-size: 28rpx;
+  color: rgba(255,255,255,0.8);
+  margin-bottom: 80rpx;
 }
 
 .button-container {
-    margin: 32rpx;
+  width: 100%;
+  padding: 0 40rpx;
+}
+
+.wechat-login-btn {
+  background: linear-gradient(135deg, #07c160 0%, #05a050 100%);
+  color: #fff;
+  border-radius: 50rpx;
+  font-size: 32rpx;
+  font-weight: 600;
+  height: 100rpx;
+  line-height: 100rpx;
+  border: none;
+  box-shadow: 0 8rpx 24rpx rgba(7,193,96,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wechat-login-btn::after {
+  border: none;
+}
+
+.wechat-login-btn:active {
+  opacity: 0.9;
+  transform: scale(0.98);
+}
+
+.wechat-icon {
+  margin-right: 16rpx;
+  font-size: 36rpx;
+}
+
+.tips {
+  margin-top: 40rpx;
+}
+
+.tip-text {
+  font-size: 24rpx;
+  color: rgba(255,255,255,0.7);
+  background: rgba(255,255,255,0.15);
+  padding: 12rpx 32rpx;
+  border-radius: 30rpx;
+}
+
+.login-footer {
+  padding-bottom: 40rpx;
+  text-align: center;
+}
+
+.agreement-text {
+  font-size: 22rpx;
+  color: rgba(255,255,255,0.6);
 }

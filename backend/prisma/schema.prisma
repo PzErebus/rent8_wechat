@@ -1,0 +1,255 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// 管理员表
+model Admin {
+  id            Int      @id @default(autoincrement())
+  username      String   @unique @db.VarChar(50)
+  password      String   @db.VarChar(255)
+  nickname      String   @default("") @db.VarChar(50)
+  email         String   @default("") @db.VarChar(100)
+  phone         String   @default("") @db.VarChar(20)
+  avatar        String   @default("") @db.VarChar(255)
+  role          Role     @default(ADMIN)
+  status        Status   @default(ACTIVE)
+  lastLoginAt   DateTime? @map("last_login_at")
+  lastLoginIp   String   @default("") @map("last_login_ip") @db.VarChar(50)
+  createdAt     DateTime @default(now()) @map("created_at")
+  updatedAt     DateTime @updatedAt @map("updated_at")
+  logs          OperationLog[]
+
+  @@map("admins")
+}
+
+// 房东用户表（小程序用户）
+model User {
+  id              Int      @id @default(autoincrement())
+  openid          String   @unique @db.VarChar(100)
+  unionid         String   @default("") @db.VarChar(100)
+  nickname        String   @default("") @db.VarChar(100)
+  avatar          String   @default("") @db.VarChar(255)
+  phone           String   @default("") @db.VarChar(20)
+  userType        UserType @default(TRIAL) @map("user_type")
+  status          UserStatus @default(ACTIVE)
+  trialStartAt    DateTime? @map("trial_start_at")
+  trialEndAt      DateTime? @map("trial_end_at")
+  formalStartAt   DateTime? @map("formal_start_at")
+  formalEndAt     DateTime? @map("formal_end_at")
+  remark          String   @default("") @db.Text
+  roomCount       Int      @default(0) @map("room_count")
+  tenantCount     Int      @default(0) @map("tenant_count")
+  loginCount      Int      @default(0) @map("login_count")
+  lastLoginAt     DateTime? @map("last_login_at")
+  createdAt       DateTime @default(now()) @map("created_at")
+  updatedAt       DateTime @updatedAt @map("updated_at")
+  
+  orders          Order[]
+  rooms           Room[]
+  tenants         Tenant[]
+  bills           Bill[]
+
+  @@map("users")
+}
+
+// 订单表
+model Order {
+  id            Int         @id @default(autoincrement())
+  orderNo       String      @unique @map("order_no") @db.VarChar(50)
+  userId        Int         @map("user_id")
+  packageType   PackageType @map("package_type")
+  duration      Int         // 月数
+  amount        Decimal     @db.Decimal(10, 2)
+  payMethod     PayMethod   @default(WECHAT) @map("pay_method")
+  payStatus     PayStatus   @default(PENDING) @map("pay_status")
+  payAt         DateTime?   @map("pay_at")
+  payTradeNo    String      @default("") @map("pay_trade_no") @db.VarChar(100)
+  remark        String      @default("") @db.Text
+  adminId       Int?        @map("admin_id")
+  createdAt     DateTime    @default(now()) @map("created_at")
+  updatedAt     DateTime    @updatedAt @map("updated_at")
+
+  user          User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("orders")
+}
+
+// 房间表
+model Room {
+  id            Int      @id @default(autoincrement())
+  userId        Int      @map("user_id")
+  roomNo        String   @map("room_no") @db.VarChar(50)
+  address       String   @db.VarChar(255)
+  rent          Decimal  @db.Decimal(10, 2)
+  deposit       Decimal  @db.Decimal(10, 2)
+  area          Float?   // 面积
+  description   String   @default("") @db.Text
+  status        RoomStatus @default(VACANT)
+  createdAt     DateTime @default(now()) @map("created_at")
+  updatedAt     DateTime @updatedAt @map("updated_at")
+
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  tenants       Tenant[]
+  bills         Bill[]
+
+  @@map("rooms")
+}
+
+// 租客表
+model Tenant {
+  id            Int      @id @default(autoincrement())
+  userId        Int      @map("user_id")
+  roomId        Int      @map("room_id")
+  name          String   @db.VarChar(50)
+  phone         String   @db.VarChar(20)
+  idCard        String   @default("") @map("id_card") @db.VarChar(18)
+  checkInAt     DateTime @map("check_in_at")
+  checkOutAt    DateTime? @map("check_out_at")
+  rent          Decimal  @db.Decimal(10, 2)
+  deposit       Decimal  @db.Decimal(10, 2)
+  status        TenantStatus @default(ACTIVE)
+  remark        String   @default("") @db.Text
+  createdAt     DateTime @default(now()) @map("created_at")
+  updatedAt     DateTime @updatedAt @map("updated_at")
+
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  room          Room     @relation(fields: [roomId], references: [id], onDelete: Cascade)
+  bills         Bill[]
+
+  @@map("tenants")
+}
+
+// 账单表
+model Bill {
+  id            Int      @id @default(autoincrement())
+  userId        Int      @map("user_id")
+  roomId        Int      @map("room_id")
+  tenantId      Int?     @map("tenant_id")
+  billType      BillType @map("bill_type")
+  amount        Decimal  @db.Decimal(10, 2)
+  paidAmount    Decimal  @default(0) @map("paid_amount") @db.Decimal(10, 2)
+  periodStart   DateTime @map("period_start")
+  periodEnd     DateTime @map("period_end")
+  dueDate       DateTime @map("due_date")
+  paidAt        DateTime? @map("paid_at")
+  status        BillStatus @default(UNPAID)
+  remark        String   @default("") @db.Text
+  createdAt     DateTime @default(now()) @map("created_at")
+  updatedAt     DateTime @updatedAt @map("updated_at")
+
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  room          Room     @relation(fields: [roomId], references: [id], onDelete: Cascade)
+  tenant        Tenant?  @relation(fields: [tenantId], references: [id], onDelete: SetNull)
+
+  @@map("bills")
+}
+
+// 系统设置表
+model Setting {
+  id            Int      @id @default(autoincrement())
+  key           String   @unique @db.VarChar(50)
+  value         String   @db.Text
+  description   String   @default("") @db.VarChar(255)
+  createdAt     DateTime @default(now()) @map("created_at")
+  updatedAt     DateTime @updatedAt @map("updated_at")
+
+  @@map("settings")
+}
+
+// 操作日志表
+model OperationLog {
+  id            Int      @id @default(autoincrement())
+  adminId       Int?     @map("admin_id")
+  adminName     String   @default("") @map("admin_name") @db.VarChar(50)
+  action        String   @db.VarChar(50)
+  targetType    String   @default("") @map("target_type") @db.VarChar(50)
+  targetId      Int      @default(0) @map("target_id")
+  content       String   @default("") @db.Text
+  ip            String   @default("") @db.VarChar(50)
+  userAgent     String   @default("") @map("user_agent") @db.Text
+  createdAt     DateTime @default(now()) @map("created_at")
+
+  admin         Admin?   @relation(fields: [adminId], references: [id], onDelete: SetNull)
+
+  @@map("operation_logs")
+  @@index([adminId])
+  @@index([action])
+  @@index([createdAt])
+}
+
+// 枚举类型
+enum Role {
+  SUPER
+  ADMIN
+}
+
+enum Status {
+  ACTIVE
+  DISABLED
+}
+
+enum UserType {
+  TRIAL
+  FORMAL
+}
+
+enum UserStatus {
+  ACTIVE
+  EXPIRED
+  DISABLED
+}
+
+enum PackageType {
+  TRIAL
+  FORMAL
+}
+
+enum PayMethod {
+  WECHAT
+  ALIPAY
+  BANK
+  CASH
+}
+
+enum PayStatus {
+  PENDING
+  SUCCESS
+  FAILED
+  REFUNDED
+}
+
+enum RoomStatus {
+  VACANT
+  OCCUPIED
+  MAINTENANCE
+}
+
+enum TenantStatus {
+  ACTIVE
+  CHECKED_OUT
+}
+
+enum BillType {
+  RENT
+  DEPOSIT
+  ELECTRICITY
+  WATER
+  GAS
+  PROPERTY
+  OTHER
+}
+
+enum BillStatus {
+  UNPAID
+  PARTIAL
+  PAID
+  OVERDUE
+}

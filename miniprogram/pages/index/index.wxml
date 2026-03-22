@@ -1,20 +1,52 @@
 <!-- pages/index/index.wxml -->
 <view class="main">
-  <view class="desc">
-    <view wx:if="{{username}}">
-      欢迎 {{username}} ！您的账号于
-      <span class="blue">{{expiration_date}}</span>
-      到期。
+  <!-- 用户信息卡片 -->
+  <view class="user-card">
+    <view class="user-header">
+      <image class="user-avatar" src="{{userInfo.avatar || '/images/rent.png'}}" mode="aspectFill"/>
+      <view class="user-info">
+        <view class="user-name">{{userInfo.nickname || '房东用户'}}</view>
+        <view class="user-type">
+          <text class="type-badge {{userInfo.user_type === 'trial' ? 'trial' : 'formal'}}">
+            {{userInfo.user_type === 'trial' ? '试用会员' : '正式会员'}}
+          </text>
+        </view>
+      </view>
     </view>
-    <view wx:else>
-      欢迎您！
-      <span class="blue" bind:tap="onLoginTap">请登录！</span>
+    
+    <!-- 到期提醒 -->
+    <view class="expire-notice {{isExpired ? 'expired' : remainingDays <= 3 ? 'warning' : ''}}" wx:if="{{userInfo}}">
+      <view class="notice-content" wx:if="{{!isExpired}}">
+        <text class="notice-text">有效期至 {{expireDate}}</text>
+        <text class="remaining-days" wx:if="{{remainingDays <= 7}}">（剩余{{remainingDays}}天）</text>
+      </view>
+      <view class="notice-content expired" wx:else>
+        <text class="notice-text">⚠️ 您的试用期已到期</text>
+        <text class="renew-btn" bind:tap="onRenewTap">立即续费</text>
+      </view>
     </view>
   </view>
-  <pull-down-list wx:for="{{list}}" name="{{item.name}}" icon="{{item.icon}}" wx:key="name" childArr="{{item.childArr}}" bind:click="clickHandle" />
+
+  <!-- 功能菜单 -->
+  <view class="menu-section">
+    <view class="section-title">功能菜单</view>
+    <pull-down-list 
+      wx:for="{{list}}" 
+      name="{{item.name}}" 
+      icon="{{item.icon}}" 
+      wx:key="name" 
+      childArr="{{item.childArr}}" 
+      bind:click="clickHandle" 
+    />
+  </view>
+
+  <!-- 到期提示遮罩 -->
+  <view class="expired-mask" wx:if="{{isExpired}}">
+    <view class="mask-content">
+      <view class="mask-icon">⚠️</view>
+      <view class="mask-title">试用已到期</view>
+      <view class="mask-desc">您的试用期已结束，请联系管理员续费后继续使用</view>
+      <button class="mask-btn" bind:tap="onRenewTap">联系客服续费</button>
+    </view>
+  </view>
 </view>
-<span wx:if="{{!username}}">
-  <view class="button-container">
-    <t-button theme="primary" size="large" block bindtap="onLoginTap">登 录</t-button>
-  </view>
-</span>

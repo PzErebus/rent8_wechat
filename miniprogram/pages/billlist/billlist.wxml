@@ -1,0 +1,60 @@
+<!--pages/billlist/billlist.wxml-->
+<view class="bill-page">
+  <!-- 统计卡片 -->
+  <view class="stats-card">
+    <view class="stats-item">
+      <text class="stats-num">¥{{stats.paidAmount}}</text>
+      <text class="stats-label">已收</text>
+    </view>
+    <view class="stats-item">
+      <text class="stats-num text-danger">¥{{stats.unpaidAmount}}</text>
+      <text class="stats-label">待收</text>
+    </view>
+    <view class="stats-item">
+      <text class="stats-num">{{stats.totalCount}}</text>
+      <text class="stats-label">账单数</text>
+    </view>
+  </view>
+
+  <!-- 月份选择器 -->
+  <picker mode="selector" range="{{months}}" value="{{currentMonth}}" bindchange="onMonthChange">
+    <view class="month-picker">
+      <text>{{currentMonth}}</text>
+      <t-icon name="chevron-down" size="32rpx"></t-icon>
+    </view>
+  </picker>
+
+  <!-- 筛选 -->
+  <view class="filter-tabs">
+    <view class="filter-tab {{status === '' ? 'active' : ''}}" data-status="" bindtap="onStatusChange">全部</view>
+    <view class="filter-tab {{status === 'paid' ? 'active' : ''}}" data-status="paid" bindtap="onStatusChange">已付</view>
+    <view class="filter-tab {{status === 'unpaid' ? 'active' : ''}}" data-status="unpaid" bindtap="onStatusChange">未付</view>
+  </view>
+
+  <!-- 账单列表 -->
+  <scroll-view scroll-y class="bill-list">
+    <view class="bill-card" wx:for="{{bills}}" wx:key="id" bindtap="goDetail" data-id="{{item.id}}">
+      <view class="bill-header">
+        <text class="room-num">{{item.roomNumber}}</text>
+        <text class="bill-status status-{{item.status}}">{{item.status === 'paid' ? '已付' : '未付'}}</text>
+      </view>
+      <view class="bill-info">
+        <text class="bill-type">{{item.type === 'rent' ? '租金' : item.type === 'electric' ? '电费' : item.type === 'water' ? '水费' : item.type}}</text>
+        <text class="bill-amount">¥{{item.amount}}</text>
+      </view>
+    </view>
+
+    <view class="load-more" wx:if="{{bills.length > 0}}">
+      <text wx:if="{{loading}}">加载中...</text>
+      <text wx:elif="{{!hasMore}}">没有更多了</text>
+    </view>
+
+    <view class="empty" wx:if="{{bills.length === 0 && !loading}}">
+      <text>暂无账单</text>
+    </view>
+  </scroll-view>
+
+  <view class="add-btn" bindtap="goAdd">
+    <t-icon name="add" size="48rpx" color="#fff"></t-icon>
+  </view>
+</view>
